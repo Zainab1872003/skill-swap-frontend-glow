@@ -22,48 +22,13 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <MainLayout>
-                <Index />
-              </MainLayout>
-            }
-          />
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/register" element={<Register />} />
-          <Route
-            path="/dashboard"
-            element={
-              <MainLayout>
-                <Dashboard />
-              </MainLayout>
-            }
-          />
-          <Route
-            path="/marketplace"
-            element={
-              <MainLayout>
-                <Marketplace />
-              </MainLayout>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <MainLayout>
-                <Profile />
-              </MainLayout>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <MainLayout>
-                <NotFound />
-              </MainLayout>
-            }
-          />
+          <Route path="/" element={<MainLayout><Index /></MainLayout>} />
+          <Route path="/auth/login" element={<MainLayout><Login /></MainLayout>} />
+          <Route path="/auth/register" element={<MainLayout><Register /></MainLayout>} />
+          <Route path="/dashboard" element={<MainLayout><Dashboard /></MainLayout>} />
+          <Route path="/marketplace" element={<MainLayout><Marketplace /></MainLayout>} />
+          <Route path="/profile" element={<MainLayout><Profile /></MainLayout>} />
+          <Route path="*" element={<MainLayout><NotFound /></MainLayout>} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
