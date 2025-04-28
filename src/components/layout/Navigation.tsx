@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -17,6 +16,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const Navigation = () => {
   const isMobile = useIsMobile();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
   // Auth state would typically come from a context/Redux
   const isLoggedIn = false; // Placeholder, replace with actual auth state
 
@@ -33,16 +33,13 @@ const Navigation = () => {
 
           {!isMobile && (
             <div className="hidden md:flex items-center space-x-6">
-              <Link to="/marketplace" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link to="/marketplace" className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === '/marketplace' ? 'text-primary' : ''}`}>
                 Explore Skills
               </Link>
-              <Link to="/teach" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link to="/teach" className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === '/teach' ? 'text-primary' : ''}`}>
                 Teach
               </Link>
-              <Link to="/learn" className="text-sm font-medium hover:text-primary transition-colors">
-                Learn
-              </Link>
-              <Link to="/about" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link to="/how-it-works" className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === '/how-it-works' ? 'text-primary' : ''}`}>
                 How It Works
               </Link>
             </div>
@@ -137,10 +134,7 @@ const Navigation = () => {
             <Link to="/teach" className="py-2 text-sm font-medium">
               Teach
             </Link>
-            <Link to="/learn" className="py-2 text-sm font-medium">
-              Learn
-            </Link>
-            <Link to="/about" className="py-2 text-sm font-medium">
+            <Link to="/how-it-works" className="py-2 text-sm font-medium">
               How It Works
             </Link>
             <div className="relative w-full py-2">
