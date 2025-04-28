@@ -1,5 +1,5 @@
 
-import { GraduationCap, Coins, BookCheck, LayersThree } from 'lucide-react';
+import { GraduationCap, Coins, BookCheck, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ const HowItWorks = () => {
       description: "Sign up and list your skills and expertise areas. Add your educational background and certifications."
     },
     {
-      icon: <LayersThree className="w-12 h-12 text-primary" />,
+      icon: <Layers className="w-12 h-12 text-primary" />,
       title: "2. Browse Skills",
       description: "Explore available tutorials or create your own to share your knowledge with others."
     },
