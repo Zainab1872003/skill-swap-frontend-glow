@@ -1,0 +1,149 @@
+
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { useToast } from '@/hooks/use-toast';
+import { Separator } from '@/components/ui/separator';
+
+const LoginForm = () => {
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    // This would be replaced with actual authentication
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast({
+        title: "Login Successful",
+        description: "Welcome back to SkillSwap!",
+      });
+      
+      // Redirect would happen here
+    } catch (error) {
+      toast({
+        title: "Login Failed",
+        description: "Please check your credentials and try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = () => {
+    setIsLoading(true);
+    
+    // This would be replaced with Google OAuth
+    toast({
+      title: "Google Authentication",
+      description: "Connecting to Google...",
+    });
+    
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  };
+
+  return (
+    <div className="space-y-6">
+      <Button 
+        variant="outline" 
+        className="w-full flex items-center gap-3"
+        onClick={handleGoogleLogin}
+        disabled={isLoading}
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clipPath="url(#clip0_1_2)">
+            <path d="M19.9895 10.1871C19.9895 9.36767 19.9214 8.76973 19.7742 8.14966H10.1992V11.848H15.8195C15.7062 12.7671 15.0943 14.1512 13.7346 15.0813L13.7155 15.2051L16.7429 17.4969L16.9527 17.5174C18.8789 15.7789 19.9895 13.221 19.9895 10.1871Z" fill="#4285F4"/>
+            <path d="M10.1993 19.9314C12.9527 19.9314 15.2643 19.0456 16.9527 17.5174L13.7346 15.0813C12.8734 15.6682 11.7176 16.0779 10.1993 16.0779C7.50243 16.0779 5.21352 14.3395 4.39759 11.9366L4.27799 11.9466L1.13003 14.3273L1.08887 14.4391C2.76588 17.6945 6.21061 19.9314 10.1993 19.9314Z" fill="#34A853"/>
+            <path d="M4.39748 11.9366C4.18219 11.3166 4.05759 10.6521 4.05759 9.96565C4.05759 9.27909 4.18219 8.61473 4.38615 7.99466L4.38045 7.8626L1.19304 5.44366L1.08875 5.49214C0.397576 6.84305 0.000976562 8.36008 0.000976562 9.96565C0.000976562 11.5712 0.397576 13.0882 1.08875 14.4391L4.39748 11.9366Z" fill="#FBBC05"/>
+            <path d="M10.1993 3.85336C12.1142 3.85336 13.406 4.66168 14.1425 5.33717L17.0207 2.59107C15.253 0.985496 12.9527 0 10.1993 0C6.2106 0 2.76588 2.23672 1.08887 5.49214L4.38626 7.99466C5.21352 5.59183 7.50242 3.85336 10.1993 3.85336Z" fill="#EB4335"/>
+          </g>
+          <defs>
+            <clipPath id="clip0_1_2">
+              <rect width="20" height="20" fill="white"/>
+            </clipPath>
+          </defs>
+        </svg>
+        Continue with Google
+      </Button>
+
+      <div className="flex items-center">
+        <Separator className="flex-1" />
+        <span className="px-3 text-xs text-gray-400">OR</span>
+        <Separator className="flex-1" />
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="email">Email address</Label>
+          <Input 
+            id="email"
+            type="email"
+            placeholder="name@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <Label htmlFor="password">Password</Label>
+            <Link 
+              to="/auth/forgot-password" 
+              className="text-xs text-primary hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
+          <Input 
+            id="password"
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        
+        <div className="flex items-center space-x-2">
+          <Checkbox id="remember" />
+          <label
+            htmlFor="remember"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Remember me
+          </label>
+        </div>
+        
+        <Button 
+          type="submit" 
+          className="w-full skill-gradient"
+          disabled={isLoading}
+        >
+          {isLoading ? "Signing in..." : "Sign in"}
+        </Button>
+        
+        <p className="text-center text-sm text-gray-600">
+          Don't have an account?{" "}
+          <Link to="/auth/register" className="text-primary font-medium hover:underline">
+            Sign up
+          </Link>
+        </p>
+      </form>
+    </div>
+  );
+};
+
+export default LoginForm;
